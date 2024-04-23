@@ -1,0 +1,249 @@
+[frame].visible {
+  display: block;
+}
+
+[frame] {
+  display: none;
+}
+[muiltyCardWrapper] {
+  /* border: 1px solid #fff; */
+  position: relative;
+  padding: var(--padding);
+  /* min-height: var(--minHeight); */
+
+  --rt: var(--sizeControlBtn);
+  --rb: calc(var(--sizeControlBtn) * 4);
+
+  --rSnip: 12px;
+  --iCorner: calc(var(--sizeControlBtn) * 0.75);
+
+  --corner: 24px;
+  --padding: calc(var(--corner) * 1.1);
+
+  /* calc плохо передаеться в getPropertyValue */
+  --sizeControlBtn: 22px;
+  --marginControlBtn: 10px;
+
+  --card--type: var(--blue);
+  --platform--background: rgba(85, 85, 85, 0.986);
+  --platform--border-color: rgb(107, 147, 207);
+  --platform--border-width: 1.5px;
+}
+[muiltyCardWrapper].info {
+  --card--type: var(--gold);
+}
+[muiltyCardWrapper].product {
+  --card--type: var(--lemon);
+}
+[muiltyCardWrapper].video {
+  --card--type: var(--coral);
+}
+[muiltyCardWrapper].question {
+  --card--type: var(--purple);
+}
+
+[muiltyCardContent] {
+  /* display: none; */
+  background-color: green;
+  position: relative; /* Добавляем позиционирование */
+  z-index: 2; /* Устанавливаем z-index выше, чем у muiltyCardPlatform */
+}
+
+[muiltyCardControl] {
+  /* background-color: rgb(205, 241, 0); */
+  /* display: none; */
+  position: absolute;
+  top: calc(var(--sizeControlBtn) * 2);
+  right: -2px;
+  /* background-color: rgb(68, 68, 68); */
+  /* background-color: black; */
+  z-index: 0;
+}
+
+[muiltyCardPlatform] {
+}
+
+[muiltyCardPlatform]::before {
+  background-color: var(--platform--background);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+
+  clip-path: polygon(
+    var(--corner) 0px,
+    0px var(--corner),
+    0px 100%,
+    calc(100% - var(--corner)) 100%,
+    100% calc(100% - var(--corner)),
+    calc(100% - 0px) calc(var(--rb)),
+    calc(100% - var(--rSnip)) calc(var(--rb) - var(--iCorner)),
+    calc(100% - var(--rSnip)) calc(var(--rt) + var(--iCorner)),
+    calc(100% - 0px) var(--rt),
+    100% 0px
+  );
+}
+
+[muiltyCardPlatform]::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+
+  background-color: var(--platform--border-color);
+
+  --borCorner: calc(0.33px + var(--corner));
+  --borSnip: calc(var(--platform--border-width) + var(--rSnip));
+
+  --ih3: var(--rt);
+  --ih4: calc(var(--iCorner) + var(--rt));
+  --ih5: calc(var(--rb) - var(--iCorner));
+  --ih6: var(--rb);
+
+  --eh3: calc(var(--rt) - 0.33px);
+  --eh4: calc(var(--iCorner) + var(--rt) - 0.33px);
+  --eh5: calc(var(--rb) + 0.33px - var(--iCorner));
+  --eh6: calc(var(--rb) + 0.33px);
+
+  clip-path: polygon(
+    calc(100% - var(--rSnip)) var(--ih5),
+    calc(100% - var(--rSnip)) var(--ih4),
+    100% var(--ih3),
+    100% 0,
+    var(--corner) 0px,
+    0px var(--corner),
+    0 100%,
+    calc(100% - var(--corner)) 100%,
+    100% calc(100% - var(--corner)),
+    100% var(--ih6),
+    calc(100% - var(--rSnip)) var(--ih5),
+    calc(100% - var(--platform--border-width)) var(--eh6),
+    calc(100% - var(--platform--border-width)) calc(100% - var(--borCorner)),
+    calc(100% - var(--borCorner)) calc(100% - var(--platform--border-width)),
+    var(--platform--border-width) calc(100% - var(--platform--border-width)),
+    var(--platform--border-width) var(--borCorner),
+    var(--borCorner) var(--platform--border-width),
+    calc(100% - var(--platform--border-width)) var(--platform--border-width),
+    calc(100% - var(--platform--border-width)) var(--eh3),
+    calc(100% - var(--borSnip)) var(--eh4),
+    calc(100% - var(--borSnip)) var(--eh5),
+    calc(100% - var(--platform--border-width)) var(--eh6)
+  );
+}
+
+[muiltyCardPlatform] :nth-child(1) {
+  position: absolute;
+  top: -10px;
+  left: 56px;
+  width: 50px;
+  height: 10px;
+  background-color: var(--card--type);
+}
+
+[muiltyCardContent] > section {
+  background: red;
+}
+.cardControl--list > li {
+  height: var(--sizeControlBtn);
+  display: flex;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cardControl--list > li:hover {
+  /* transform: translateX(55%); */
+}
+.cardControl--list > li:not(:last-child) {
+  margin-bottom: var(--marginControlBtn);
+}
+
+.control--btn {
+  --btn--background: transparent;
+  --btn--border-color: var(--btn--border-color__custom, var(--purple));
+  --btn--border-width: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+
+  border: none;
+  background-color: transparent;
+
+  width: var(--sizeControlBtn);
+  height: var(--sizeControlBtn);
+}
+
+.control--btn:hover {
+  /* --btn--background: var(--btn--border-color__custom, rgb(238, 0, 0)); */
+  --btn--border-color: var(--btn--border-color__custom__hover, var(--purple__hover-focus));
+}
+.control--btn.active {
+  --btn--background: var(--btn--border-color__custom, var(--purple));
+  --btn--border-color: var(--btn--border-color__custom__active, var(--purple__active));
+}
+
+.control--btn > svg {
+  width: 100%;
+  height: 100%;
+}
+
+.control--btn.info {
+  --btn--border-color__custom: var(--gold);
+  --btn--border-color__custom__hover: var(--gold__hover-focus);
+  --btn--border-color__custom__active: var(--gold__active);
+}
+.control--btn.product {
+  --btn--border-color__custom: var(--lemon);
+  --btn--border-color__custom__hover: var(--lemon__hover-focus);
+  --btn--border-color__custom__active: var(--lemon__active);
+}
+.control--btn.video {
+  --btn--border-color__custom: var(--coral);
+  --btn--border-color__custom__hover: var(--coral__hover-focus);
+  --btn--border-color__custom__active: var(--coral__active);
+}
+.control--btn.question {
+  --btn--border-color__custom: var(--pink);
+  --btn--border-color__custom__hover: var(--pink__hover-focus);
+  --btn--border-color__custom__active: var(--pink__active);
+}
+
+[muiltyCardModal] {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: var(--padding);
+  /* background-color: rgba(255, 251, 1, 0.678); */
+  width: 100%;
+  height: 100%;
+}
+
+.muiltyCardModal--content {
+  position: sticky;
+  top: 10%;
+  /* position: sticky; */
+  width: 80%;
+  height: 80vh;
+  margin: auto;
+  background-color: rgb(43, 43, 43);
+}
+
+[muiltyCardWrapper].modal [muiltyCardPlatform]::after,
+[muiltyCardWrapper].modal [muiltyCardPlatform]::before,
+[muiltyCardModal] {
+  z-index: 10;
+}
+[muiltyCardWrapper].modal {
+  --platform--background: rgba(24, 24, 24, 0.842);
+}
+
+[muiltyCardWrapper].modal [muiltyCardModal] {
+  display: block;
+}

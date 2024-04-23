@@ -1,0 +1,39 @@
+{
+  "example": [
+    {
+      "title": "firts cards example",
+      "frameIsArticle": true,
+      "type": "info",
+      "contents": [
+        { "teg": "p", "argm": { "qwe": "asd" }, "textContent": "asdasdasd3" },
+        { "teg": "p", "textContent": "3" },
+        {
+          "teg": "img",
+          "argm": {
+            "src": "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+            "alt": "птичка",
+            "width": "400"
+          }
+        },
+        { "teg": "div", "textContent": "3" },
+        { "teg": "input", "textContent": "3asdasd asd"}
+      ]
+    },
+    {
+      "title": "firts cards example",
+      "frameIsArticle": true,
+      "type": "video",
+      "contents": [
+        { "teg": "p", "argm": { "qwe": "asd" }, "textContent": "4" },
+        {
+          "teg": "img",
+          "argm": {
+            "src": "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+            "alt": "птичка",
+            "width": "400"
+          }
+        }
+      ]
+    }
+  ]
+}

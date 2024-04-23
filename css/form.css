@@ -1,0 +1,121 @@
+.inputBox {
+  position: relative;
+  width: 50%;
+  /* --corner: 0px; */
+  --_cornerLeftTop: var(--cornerLeftTop, var(--corner, 20px));
+  --_cornerRightBottom: var(--cornerRightBottom, var(--corner, 20px));
+  --border: 0.8px;
+  --padding: calc(max(var(--corner, 0px), 17px) * 1.1);
+  --border-color: #00d9ff;
+  --background-color: #5e5e5e;
+
+  color: black;
+}
+
+.inputBox > input,
+.inputBox::after,
+.inputBox::before {
+  width: 100%;
+  height: 100%;
+}
+
+.inputBox > input {
+  min-height: 20px;
+  position: relative;
+  background-color: transparent;
+  padding: var(--padding);
+  z-index: 3;
+}
+
+.inputBox::after,
+.inputBox::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.inputBox::before {
+  z-index: 1;
+  background-color: var(--background-color);
+  clip-path: polygon(
+    var(--_cornerLeftTop) 0px,
+    0px var(--_cornerLeftTop),
+    0px 100%,
+    calc(100% - var(--_cornerRightBottom)) 100%,
+    calc(100% - 0px) calc(100% - var(--_cornerRightBottom)),
+    100% 0,
+    0px 0px
+  );
+}
+
+.inputBox::after {
+  transition: background-color 0.3s ease;
+  z-index: 2;
+
+  --fixBorderLeftTop: calc(var(--_cornerLeftTop) + 1px);
+  --fixBorderRightBottom: calc(var(--_cornerRightBottom) + 0.5px);
+
+  background-color: var(--border-color);
+  clip-path: polygon(
+    var(--border) var(--fixBorderLeftTop),
+    var(--border) calc(100% - var(--border)),
+    calc(100% - var(--fixBorderRightBottom)) calc(100% - var(--border)),
+    calc(100% - var(--border)) calc(100% - var(--fixBorderRightBottom)),
+    calc(100% - var(--border)) var(--border),
+    var(--fixBorderLeftTop) var(--border),
+    var(--border) var(--fixBorderLeftTop),
+    var(--_cornerLeftTop) 0px,
+    100% 0px,
+    100% calc(100% - var(--_cornerRightBottom)),
+    calc(100% - var(--_cornerRightBottom)) 100%,
+    0px 100%,
+    0px var(--_cornerLeftTop),
+    var(--_cornerLeftTop) 0px
+  );
+}
+
+input:focus {
+  color: #ffffff;
+}
+
+.inputBox:focus-within::after {
+  background-color: red;
+}
+
+.inputBox > label > span {
+  transition: transform 0.3s ease;
+  display: inline-block;
+  min-width: 5px;
+}
+.inputBox:focus-within span,
+.inputBox input:not(:placeholder-shown) + label > span {
+  color: red;
+  background-color: #00d9ff;
+  transform: translateY(-220%);
+}
+
+.inputBox[status='ok']::after {
+  background-color: var(--ok);
+}
+.inputBox[status='error']::after {
+  background-color: var(--error);
+}
+
+.inputBox > label {
+  color: #ffffff;
+  position: absolute;
+
+  left: 22px;
+  top: 50%;
+
+  z-index: 3;
+
+  transform: translateY(-50%);
+
+  pointer-events: none;
+}
+
+[initFrorm] {
+  border: 1px solid #fff;
+}
